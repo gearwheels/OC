@@ -1,0 +1,52 @@
+
+threads = 1
+time = 7.330000ms
+
+threads = 2
+time = 6.028000ms
+
+threads = 3
+time = 5.884000ms
+
+threads = 4
+time = 6.798000ms
+
+threads = 5
+time = 6.294000ms
+
+threads = 6
+time = 6.014000ms
+
+threads = 7
+time = 6.401000ms
+
+threads = 8
+time = 5.948000ms
+
+threads = 9
+time = 7.120000ms
+
+threads = 8
+time = 7.952000ms
+
+threads = 9
+time = 8.508000ms
+
+threads = 7
+time = 7.343000ms
+
+threads = 6
+time = 6.259000ms
+
+threads = 6
+time = 6.208000ms
+
+threads = 2
+time = 7.518000ms
+
+threads = 2
+time = 6.124000ms
+
+threads = 2
+time = 6.664000ms
+

@@ -2,7 +2,7 @@ FLAGS = -std=gnu11 -pedantic
 
 all: a.out child.out
 
-a.out: main1.c
+a.out: main.c
 	gcc $(FLAGS) main.c -o a.out
 
 child.out: child.c

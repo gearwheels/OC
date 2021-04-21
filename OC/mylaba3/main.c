@@ -119,7 +119,7 @@ int main(int argc, char const *argv[]) {
                 }
                 arr_thr_data[i + j].numstr = i + j;
 
-                if (pthread_create(&threads[j], NULL, matrixMin, /*(void *) &args[i + j]*/ &arr_thr_data[i+j]) != 0){
+                if (pthread_create(&threads[j], NULL, matrixMin, &arr_thr_data[i+j]) != 0){
                     perror("Cannot create thread\n");
                     return 1;
                 }
@@ -152,7 +152,7 @@ int main(int argc, char const *argv[]) {
                 }
                 arr_thr_data[i + j].numstr = i + j;
 
-                if (pthread_create(&threads[j], NULL, erosion, /*(void *) &args[i + j]*/ &arr_thr_data[i+j]) != 0){
+                if (pthread_create(&threads[j], NULL, erosion, &arr_thr_data[i+j]) != 0){
                     perror("Cannot create thread\n");
                     return 1;
                 }
@@ -179,7 +179,7 @@ int main(int argc, char const *argv[]) {
                 }
                 arr_thr_data[j].numstr = i + j;
                 
-                if (pthread_create(&threads[j], NULL, matrixMax, /*(void *) &args[i + j]*/ &arr_thr_data[i+j]) != 0){
+                if (pthread_create(&threads[j], NULL, matrixMax, &arr_thr_data[i+j]) != 0){
                     perror("Cannot create thread\n");
                     return 1;
                 }
@@ -212,7 +212,7 @@ int main(int argc, char const *argv[]) {
                 }
                 arr_thr_data[i + j].numstr = i + j;
 
-                if (pthread_create(&threads[j], NULL, dilatation, /*(void *) &args[i + j]*/ &arr_thr_data[i+j]) != 0){
+                if (pthread_create(&threads[j], NULL, dilatation, &arr_thr_data[i+j]) != 0){
                     perror("Cannot create thread\n");
                     return 1;
                 }

@@ -42,42 +42,20 @@ int main() {
 	ftruncate(mmf1, pagesize);
 	ftruncate(mmf2, pagesize);
 
-	int id1 = fork();
+	int id1 = fork();// первый дочерний процесс 
 
 	if (id1 == -1)  {
 		perror("fork 1 error");
 		return -1;
 		
-	} else if (id1 == 0) {
-		fclose(file2);
-		close(mmf2);
-		check(dup2(fileno(file1), fileno(stdout)), "dup2 error", -1)
-		fclose(file1);
-
-		char spid[10];
-		snprintf(spid, 10, "%d", pid);
-		char* const args[] = {"child.out", mmfilename1, spid, (char *)NULL};
-		check(execv("child.out", args), "execv child.out 1 error", -1)
-
-	} else {
-		int id2 = fork();
+	}else if (id1 > 0){// родительский процесс
+		int id2 = fork();// второй дочерний процесс
 
 		if (id2 == -1)  {
 			perror("fork 2 error");
 			return -1;
 
-		} else if (id2 == 0) {
-			fclose(file1);
-			close(mmf1);
-			check(dup2(fileno(file2), fileno(stdout)), "dup2 error", -1)
-			fclose(file2);
-
-			char spid[10];
-			snprintf(spid, 10, "%d", pid);
-			char* const args[] = {"child.out", mmfilename2, spid, (char *)NULL};
-			check(execv("child.out", args), "execv child.out 2 error", -1)
-
-		} else {
+		}else if (id2 > 0){// родительский процесс
 			fclose(file1);
 			fclose(file2);
 
@@ -94,7 +72,6 @@ int main() {
 
 			char c;
 			int n = 1;
-			//while (getchar() != '\n');
 			while (scanf("%c", &c) > 0){// заполняем pipes
 				if (c != '\n'){
 					if (n % 2 != 0){
@@ -136,7 +113,28 @@ int main() {
 			check(munmap(fmap2, pagesize), "munmap error", -1);
 			close(mmf1);
 			close(mmf2);
+		}else{// второй дочерний процесс
+			fclose(file1);
+			close(mmf1);
+			check(dup2(fileno(file2), fileno(stdout)), "dup2 error", -1)
+			fclose(file2);
+
+			char spid[10];
+			snprintf(spid, 10, "%d", pid);
+			char* const args[] = {"child.out", mmfilename2, spid, (char *)NULL};
+			check(execv("child.out", args), "execv child.out 2 error", -1)
 		}
+
+	}else{// первый дочерний процесс
+		fclose(file2);
+		close(mmf2);
+		check(dup2(fileno(file1), fileno(stdout)), "dup2 error", -1)
+		fclose(file1);
+
+		char spid[10];
+		snprintf(spid, 10, "%d", pid);
+		char* const args[] = {"child.out", mmfilename1, spid, (char *)NULL};
+		check(execv("child.out", args), "execv child.out 1 error", -1)
 	}
 	return 0;
 }

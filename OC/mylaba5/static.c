@@ -1,8 +1,6 @@
 #include "functions.h"
-
 #include <stdio.h>
 #include <stdlib.h>
-
 int main() {
 	int f;
 	int a, b;
@@ -13,7 +11,7 @@ int main() {
 				perror("invalid input");
 				exit(1);
 			}
-			printf("Prime numbers: %d\n", mygcd(a, b));
+			printf("GCD: %d\n", mygcd(a, b));
 		
 		} else if (f == 2) {
 			if (scanf("%f %f", &x, &y) != 2) {
